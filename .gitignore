@@ -103,5 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
+# ---- CUSTOM AREA ---
+# Editor
+.idea/
+
 # Data from csv
 fetch_data/data
