@@ -1,6 +1,7 @@
 import pandas as pd
 import pandera as pa
 from pandera import Column, Check
+import re as re
 
 file_path = 'fetch_data/data/originals/'
 output_path = 'fetch_data/data/definitive/'
@@ -9,29 +10,45 @@ stations_file = 'stations.csv'
 trips_files = ['2021-05.csv']
 
 # validation schema
-
+schema = pa.DataFrameSchema(
+    {
+        "Departure_datetime": Column(str, Check.str_matches("^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$")),
+        "Return_datetime": Column(str, Check.str_matches("^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$")),
+        "Departure_station_id": Column(int, nullable = False),
+        "Departure_station_name": Column(str),
+        "Return_station_id": Column(int, nullable = False),
+        "Return_station_name": Column(str),
+        "Covered_distance_(m)": Column(float),
+        "Duration_(sec.)": Column(int)
+    }
+)
 
 for file_name in trips_files:
+
     # Read csv file
     df = pd.read_csv(file_path + file_name)
 
+    # FIX COLUMN NAMES
     # Rename column with datetime
     df.rename(columns = {'Departure':'Departure_datetime', 'Return':'Return_datetime'}, inplace = True)
 
-    # Conversion from string to date
+    # Replace all spaces in column names with _
+    df.columns = df.columns.str.replace(' ', '_')
+
+    # VALIDATION
+    schema.validate(df)
+
+    # DATA ELABORATION
+    # Conversion from string to datetime
     df['Departure_datetime'] = df['Departure_datetime'].str.replace('T', ' ')
     df['Return_datetime'] = df['Return_datetime'].str.replace('T', ' ')
     df['Departure_datetime'] = pd.to_datetime(df['Departure_datetime'], format='%Y-%m-%d %H:%M:%S')
     df['Return_datetime'] = pd.to_datetime(df['Return_datetime'], format='%Y-%m-%d %H:%M:%S')
 
-    # Replace all spaces in column names with _
-    df.columns = df.columns.str.replace(' ', '_')
-
     # delete rows with null values
     df = df.dropna()
 
-
-
     print(df.dtypes)
 
+    # RETURN VALIDATED AND ELABORATED DATA
     df.to_csv(output_path + file_name, index=False)

@@ -13,4 +13,6 @@ Open psql and enter in localhost, database postgres, default port, with the defa
 ## Data validation
 Before executing the python script install `pandas` and `pandera` with one of the following commands:
 - `py -m pip install pandera`  
-- `pip install pandera`  
+- `pip install pandera` 
+
+execute python script `validate_data.py`
