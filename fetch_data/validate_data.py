@@ -7,16 +7,18 @@ file_path = 'fetch_data/data/originals/'
 output_path = 'fetch_data/data/definitive/'
 
 stations_file = 'stations.csv'
-trips_files = ['2021-05.csv']
+trips_files = ['2021-0{}.csv'.format(m) for m in range(5,8) ]
+
+stations = pd.read_csv(file_path + stations_file)
 
 # validation schema
 schema = pa.DataFrameSchema(
     {
         "Departure_datetime": Column(str, Check.str_matches("^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$")),
         "Return_datetime": Column(str, Check.str_matches("^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$")),
-        "Departure_station_id": Column(int, nullable = False),
+        "Departure_station_id": Column(int, Check.isin(stations['ID']), nullable = False),
         "Departure_station_name": Column(str),
-        "Return_station_id": Column(int, nullable = False),
+        "Return_station_id": Column(int, Check.isin(stations['ID']), nullable = False),
         "Return_station_name": Column(str),
         "Covered_distance_(m)": Column(float),
         "Duration_(sec.)": Column(int)
@@ -36,7 +38,13 @@ for file_name in trips_files:
     df.columns = df.columns.str.replace(' ', '_')
 
     # VALIDATION
-    schema.validate(df)
+    try:
+        df = schema.validate(df, lazy=True)
+    except pa.errors.SchemaErrors as err:
+        print("Schema errors and failure cases:")
+        print(err.failure_cases)
+        print("\nDataFrame object that failed validation:")
+        print(err.data)
 
     # DATA ELABORATION
     # Conversion from string to datetime
