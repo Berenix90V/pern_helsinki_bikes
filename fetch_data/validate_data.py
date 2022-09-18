@@ -10,6 +10,7 @@ stations_file = 'stations.csv'
 trips_files = ['2021-0{}.csv'.format(m) for m in range(5,8) ]
 
 stations = pd.read_csv(file_path + stations_file)
+stations.drop('FID', axis = 1)
 
 # validation schema
 schema = pa.DataFrameSchema(
@@ -20,7 +21,7 @@ schema = pa.DataFrameSchema(
         "Departure_station_name": Column(str),
         "Return_station_id": Column(int, Check.isin(stations['ID']), nullable = False),
         "Return_station_name": Column(str),
-        "Covered_distance_(m)": Column(float, Check.greater_than_or_equal_to(10)),
+        "Covered_distance_(m)": Column(float, Check.greater_than_or_equal_to(10.0)),
         "Duration_(sec.)": Column(int, Check.greater_than_or_equal_to(10))
     }
 )
@@ -28,7 +29,7 @@ schema = pa.DataFrameSchema(
 for file_name in trips_files:
 
     # Read csv file
-    df = pd.read_csv(file_path + file_name)
+    df = pd.read_csv(file_path + file_name, nrows = 5)
 
     # FIX COLUMN NAMES
     # Rename column with datetime
@@ -52,6 +53,11 @@ for file_name in trips_files:
     df['Return_datetime'] = df['Return_datetime'].str.replace('T', ' ')
     df['Departure_datetime'] = pd.to_datetime(df['Departure_datetime'], format='%Y-%m-%d %H:%M:%S')
     df['Return_datetime'] = pd.to_datetime(df['Return_datetime'], format='%Y-%m-%d %H:%M:%S')
+
+    # Conversion of invalid names for postgres
+    specialChars = "!#$%^&*()."
+    for specialChar in specialChars:
+        df.columns = df.columns.str.replace(specialChar, '')
 
     # delete rows with null values
     df = df.dropna()

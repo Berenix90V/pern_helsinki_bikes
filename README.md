@@ -15,4 +15,6 @@ Before executing the python script install `pandas` and `pandera` with one of th
 - `py -m pip install pandera`  
 - `pip install pandera` 
 
-execute python script `validate_data.py`
+Execute python script `validate_data.py`
+
+The checks and triggers are insert after the import of csv to not slow it down.
