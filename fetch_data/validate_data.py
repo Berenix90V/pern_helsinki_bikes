@@ -20,8 +20,8 @@ schema = pa.DataFrameSchema(
         "Departure_station_name": Column(str),
         "Return_station_id": Column(int, Check.isin(stations['ID']), nullable = False),
         "Return_station_name": Column(str),
-        "Covered_distance_(m)": Column(float),
-        "Duration_(sec.)": Column(int)
+        "Covered_distance_(m)": Column(float, Check.greater_than_or_equal_to(10)),
+        "Duration_(sec.)": Column(int, Check.greater_than_or_equal_to(10))
     }
 )
 
@@ -47,7 +47,7 @@ for file_name in trips_files:
         print(err.data)
 
     # DATA ELABORATION
-    # Conversion from string to datetime
+    # Conversion from string to proper datetime format
     df['Departure_datetime'] = df['Departure_datetime'].str.replace('T', ' ')
     df['Return_datetime'] = df['Return_datetime'].str.replace('T', ' ')
     df['Departure_datetime'] = pd.to_datetime(df['Departure_datetime'], format='%Y-%m-%d %H:%M:%S')
