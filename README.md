@@ -17,4 +17,9 @@ Before executing the python script install `pandas` and `pandera` with one of th
 
 Execute python script `validate_data.py`
 
+## Database population
+First create your own database `my_database`, then create your `.env` file in the same directory of the python script `populate_db`.
+Run the python script `populate_db`.
+
 The checks and triggers are insert after the import of csv to not slow it down.
+

@@ -29,7 +29,7 @@ schema = pa.DataFrameSchema(
 for file_name in trips_files:
 
     # Read csv file
-    df = pd.read_csv(file_path + file_name, nrows = 5)
+    df = pd.read_csv(file_path + file_name)
 
     # FIX COLUMN NAMES
     # Rename column with datetime

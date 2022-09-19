@@ -1,3 +1,4 @@
+\connect helsinki_bikes;
 CREATE TABLE trips(
     Trip_ID SERIAL,
     Departure_datetime timestamp,
@@ -44,3 +45,5 @@ ADD CONSTRAINT minimum_distance_10_m
 CHECK ( Covered_distance_m > 10.0),
 ADD CONSTRAINT minimum_time_10_s
 CHECK ( Duration_sec > 10 )
+
+-- TODO: test if it works
