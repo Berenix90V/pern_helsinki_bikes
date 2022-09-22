@@ -3,14 +3,14 @@ import sqlalchemy as sqla
 from dotenv import dotenv_values
 from io import StringIO
 
-from sqlalchemy import MetaData, Column, String, Integer, Float, DateTime, ForeignKey
+from sqlalchemy import MetaData, Column, String, Integer, Float, DateTime, ForeignKey, CheckConstraint
 
 config = dotenv_values()
 path_string = f"postgresql://{config['DB_USER']}:{config['DB_PASSWORD']}@{config['DB_HOST']}:{config['DB_PORT']}/{config['DATABASE']}"
 engine = sqla.create_engine(path_string)
 
 file_path = 'fetch_data/data/definitive/'
-trips_files = [file_path+'2021-0{}.csv'.format(m) for m in range(5, 8)]
+trips_files = [file_path + '2021-0{}.csv'.format(m) for m in range(5, 8)]
 stations_file = 'stations.csv'
 
 # create tables
@@ -32,18 +32,17 @@ stations = sqla.Table(
     Column('y', Float),
 )
 
-
 trips = sqla.Table(
     'trips', meta,
     Column('Trip_ID', Integer, primary_key=True),
     Column('Departure_datetime', DateTime),
     Column('Return_datetime', DateTime),
-    Column('Departure_station_id', Integer, ForeignKey("stations.Station_ID")),
+    Column('Departure_station_id', Integer, ForeignKey("stations.Station_ID"), nullable=False),
     Column('Departure_station_name', String),
-    Column('Return_station_id', Integer, ForeignKey("stations.Station_ID")),
+    Column('Return_station_id', Integer, ForeignKey("stations.Station_ID"), nullable=False),
     Column('Return_station_name', String),
-    Column('Covered_distance_m', Float),
-    Column('Duration_sec', Integer),
+    Column('Covered_distance_m', Float, CheckConstraint('"Covered_distance_m">=10')),
+    Column('Duration_sec', Integer, CheckConstraint('"Duration_sec">=10')),
 )
 
 meta.create_all(engine)
@@ -73,8 +72,5 @@ populate(engine, df, "stations", index=False)
 
 df = pd.concat(map(pd.read_csv, trips_files), ignore_index=True)
 populate(engine, df, "trips")
-
-
-# TODO: create table before importing setting up the primary key
 
 # TODO: to finish the sql part with constraint etc and then delete the sql.db file
