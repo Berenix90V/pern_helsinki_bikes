@@ -110,5 +110,5 @@ dist
 # Data from csv
 fetch_data/data
 
-# pnpm-lock.yaml
-pnpm-lock.yaml
+# ignore every yaml file
+.yaml
