@@ -112,3 +112,4 @@ fetch_data/data
 
 # ignore every yaml file
 *.yaml
+*/*.yaml
