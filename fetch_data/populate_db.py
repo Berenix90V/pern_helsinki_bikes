@@ -72,5 +72,3 @@ populate(engine, df, "stations", index=False)
 
 df = pd.concat(map(pd.read_csv, trips_files), ignore_index=True)
 populate(engine, df, "trips")
-
-# TODO: to finish the sql part with constraint etc and then delete the sql.db file
