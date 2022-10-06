@@ -1,23 +1,47 @@
-# pern_application_bikes
-## Data fetch
-The csv files are stored in the path `/fetch_data/data/originals/`. \
-Their names are:
+# Pern_application_bikes
+## Data
+### Data fetch
+Save the csv files in the path `/fetch_data/data/originals/`, creating the necessary diretories \
+The names of the files are:
 - 2021-05.csv, 
 - 2021-06.csv, 
 - 2021-07.csv, 
 - stations.csv
 
-Open psql and enter in localhost, database postgres, default port, with the default user postgres and create the database helsinki_bikes with the command:
+### Database creation
+Open psql and enter in localhost, database: postgres, default port, with the default user `postgres` and create the database `helsinki_bikes` with the command:
 `CREATE DATABASE helsinki_bikes;`
 
-## Data validation
-Before executing the python script install `pandas` and `pandera` with one of the following commands:
+### Data validation
+Install `pandas` and `pandera` with one of the following commands, depending on your python installation:
 - `py -m pip install pandera`  
 - `pip install pandera` 
 
-Execute python script `validate_data.py`
+Execute python script `/fetch_data/validate_data.py`
 
-## Database population
-First create your own database `my_database`, then create your `.env` file in the same directory of the python script `populate_db`.
-Run the python script `populate_db`.
+### Database population
+Create your `.env` file in the same directory of the python script `populate_db`, `fetch_data`.
+The file must contain the following variables, substitute the values with your configuration:
+
+DB_HOST = 'localhost' \
+DB_PORT = 5432  \
+DB_USER = 'postgres_user'\
+DB_PASSWORD = 'postgres_password'\
+DATABASE = 'helsinki_bikes'
+
+Run the python script `/fetch_data/populate_db`.
+
+## Backend
+The backend is structured as a Rest API.
+Create your own `.env` file with the following variables (change them according to your configuration):
+
+PORT=3006
+
+The methods of the API are the following.
+### Stations
+- GET `/api/v1/stations` : Get all the stations
+- POST `/api/v1/stations` : Create new station
+- GET `/api/v1/stations/:id` : Get station by id
+- PUT `/api/v1/stations/:id` : Update station given the id
+- DELETE `/api/v1/stations/:id` : Delete a station given the id
 
