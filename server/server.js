@@ -7,6 +7,8 @@ const morgan = require('morgan')
 const express = require('express')
 const app = express()
 
+// const db = require("./db/connection")
+
 
 // import the routes for stations
 const stations = require('./routes/stations')
@@ -21,6 +23,7 @@ app.use(express.json())
 
 // HOME
 app.get('/', (req,res) =>{
+
     res.send('Helsinki bikes app')
 })
 

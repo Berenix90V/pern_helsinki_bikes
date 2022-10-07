@@ -1,4 +1,5 @@
-const getAllStations = (req, res) => {
+
+const getAllStations = async (req, res) => {
     console.log("get all stations")
     res.status(200).json({
         status: "success",
