@@ -1,12 +1,25 @@
+const Station = require('../models/Station')
 
-const getAllStations = async (req, res) => {
+
+const getAllStations = (req, res) => {
     console.log("get all stations")
-    res.status(200).json({
-        status: "success",
-        data: {
-            stations: ["station1", "station2"]
-        }
+    Station.findAll({
+        attributes: ['Station_ID', 'Nimi']
     })
+        .then(allStations =>
+            res.status(200).json({
+                status: "success",
+                data: {
+                    stations: allStations
+                }
+            })
+        )
+        .catch(
+            err => res.status(404).json({
+                status: "Data not found",
+                error: err
+            })
+        )
 }
 
 const createStation = (req,res) => {

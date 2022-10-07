@@ -9,8 +9,4 @@ const sequelize = new Sequelize(process.env.PG_DATABASE, process.env.PG_USER, pr
 });
 
 
-sequelize.authenticate()
-    .then(() => console.log('Connection has been established successfully.'))
-    .catch(err => console.log('Unable to connect to the database'))
-
 module.exports = sequelize

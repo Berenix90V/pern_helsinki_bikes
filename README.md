@@ -36,6 +36,14 @@ The backend is structured as a Rest API.
 Create your own `.env` file with the following variables (change them according to your configuration):
 
 PORT=3006
+PG_HOST='localhost'
+PG_PORT=5432
+PG_USER='postgres'
+PG_PASSWORD='postgres'
+PG_DATABASE='helsinki_bikes'
+
+If database connection has to be tested, run the file with working directory `server`, so that it can grab the env variables from the `.env` file
+in the server folder.
 
 The methods of the API are the following.
 ### Stations

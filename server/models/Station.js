@@ -1,10 +1,8 @@
-const sequelize = require('sequelize')
 const db = require('../db/connection')
 const {DataTypes} = require("sequelize");
-const Module = require("module");
 
-const Station = db.define('Station', {
-    StationID:{
+const Station = db.define('stations', {
+    Station_ID:{
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
@@ -13,6 +11,9 @@ const Station = db.define('Station', {
         type: DataTypes.STRING
     },
     Namn:{
+        type: DataTypes.STRING
+    },
+    Name:{
         type: DataTypes.STRING
     },
     Osoite:{
@@ -41,6 +42,13 @@ const Station = db.define('Station', {
     }
 })
 
+/*
+Station.fetchAll = async function () {
+    return await Station.findAll({
+        attributes: ['Nimi', 'Namn', 'Name']
+    })
+};
+*/
 module.exports = Station
 
 // TODO: after having changed the database setting up default values for Kaupunki and Stad, come here to check if some change is needed
