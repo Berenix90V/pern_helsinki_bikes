@@ -3,9 +3,7 @@ const Station = require('../models/Station')
 
 const getAllStations = (req, res) => {
     console.log("get all stations")
-    Station.findAll({
-        attributes: ['Station_ID', 'Nimi']
-    })
+    Station.fetchAll()
         .then(allStations =>
             res.status(200).json({
                 status: "success",
@@ -24,9 +22,11 @@ const getAllStations = (req, res) => {
 
 const createStation = (req,res) => {
     console.log(req.body)
+    const data = Station.createNewStation()
     res.status(201).json({
         status: "success",
         data: {
+            attributes: data,
             stations: req.body.name
         }
     })

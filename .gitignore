@@ -112,3 +112,6 @@ fetch_data/data
 
 # ignore every yaml file
 *.yaml
+
+# Built folder of typescript
+server/built
