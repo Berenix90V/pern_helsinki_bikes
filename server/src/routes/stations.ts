@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const {getAllStations, createStation, getStationByID, updateStationByID, deleteStationByID} = require('../controllers/stations')
+import {getAllStations, createStation, getStationByID, updateStationByID, deleteStationByID} from '../controllers/stations'
 
 
 router.route('/').get(getAllStations).post(createStation)

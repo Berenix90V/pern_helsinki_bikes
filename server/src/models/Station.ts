@@ -1,8 +1,27 @@
-const db = require('../db/connection')
+import {sequelize} from '../db/connection'
+import {Model, InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize'
 const {DataTypes} = require("sequelize");
 
-const Station = db.define('stations', {
-    Station_ID:{
+class Station extends Model<InferAttributes<Station>, InferCreationAttributes<Station>> {
+    declare StationID: CreationOptional<number>
+    declare Nimi: string
+    declare Namn: string
+    declare Name: string
+    declare Osoite: string
+    declare Adress: string
+    declare Kaupunki: string
+    declare Stad: string
+    declare Operaattor: string | null
+    declare Kapasiteet: number
+    declare x: number
+    declare y: number
+
+    static fetchAll: () => Promise<Station[]>;
+}
+
+
+Station.init({
+    StationID:{
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true
@@ -48,6 +67,9 @@ const Station = db.define('stations', {
     y:{
         type: DataTypes.FLOAT
     }
+}, {
+    tableName: 'stations',
+    sequelize // passing the `sequelize` instance is required
 })
 
 
@@ -58,21 +80,8 @@ Station.fetchAll = async function () {
     })
 }
 
-Station.createNewStation =  async function(data){
-    const notNullAttributes = {}
-    for( let key in Station.getAttributes() ){
-        if(Station.getAttributes()[key].allowNull === false){
-            notNullAttributes[key] = Station.getAttributes()[key]
-        }
-    }
-    notNullAttributes.forEach(([key, value]) => {
-        if (!(key in data)){
-            console.log("Mandatory field: {} absent", key)
-        }
-    })
-    return await Station.create({...data})
-}
 
-module.exports = Station
+
+export {Station}
 
 // TODO: after having changed the database setting up default values for Kaupunki and Stad, come here to check if some change is needed
