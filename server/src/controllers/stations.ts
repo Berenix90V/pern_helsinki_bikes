@@ -27,12 +27,9 @@ const createStation = (req: Request,res: Response) => {
     //const data = Station.createNewStation()
     res.status(201).json({
         status: "success",
-        /*data: {
-            attributes: data,
-            stations: req.body.name
+        data: {
+            Name: req.body.name
         }
-
-         */
     })
 }
 
@@ -41,7 +38,7 @@ const getStationByID = (req:Request, res: Response) => {
     res.status(200).json({
         status: "success",
         data: {
-            stations: "station 1"
+            StationID: req.params.id
         }
     })
 }

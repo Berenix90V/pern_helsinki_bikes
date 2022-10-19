@@ -21,5 +21,11 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.24.0",
     "typescript": "^4.8.4"
+  },
+  "devDependencies": {
+    "@types/jest": "29.0.x",
+    "jest": "29.0.x",
+    "supertest": "^6.3.0",
+    "ts-jest": "^29.0.3"
   }
 }
