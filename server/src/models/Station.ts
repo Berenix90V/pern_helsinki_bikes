@@ -1,22 +1,32 @@
 import {sequelize} from '../db/connection'
 import {Model, InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize'
+import {Entity} from "./Entity";
+import {IStationAttributes} from "./IStationAttributes";
 const {DataTypes} = require("sequelize");
 
-class Station extends Model<InferAttributes<Station>, InferCreationAttributes<Station>> {
+class Station extends Entity implements IStationAttributes{
     declare StationID: CreationOptional<number>
     declare Nimi: string
     declare Namn: string
     declare Name: string
     declare Osoite: string
     declare Adress: string
-    declare Kaupunki: string
-    declare Stad: string
-    declare Operaattor: string | null
+    declare Kaupunki: CreationOptional<string>
+    declare Stad: CreationOptional<string>
+    declare Operaattor: CreationOptional<string | null>
     declare Kapasiteet: number
     declare x: number
     declare y: number
 
-    static fetchAll: () => Promise<Station[]>;
+    static createNew(): Promise<Station> {
+        return Station.create()
+    }
+
+    static fetchAll(): Promise<Station[]> {
+        return Station.findAll({
+            attributes: ['Station_ID', 'Nimi', 'Namn', 'Name']
+        })
+    }
 }
 
 
@@ -74,11 +84,7 @@ Station.init({
 
 
 
-Station.fetchAll = async function () {
-    return await Station.findAll({
-        attributes: ['Station_ID', 'Nimi', 'Namn', 'Name']
-    })
-}
+
 
 
 
