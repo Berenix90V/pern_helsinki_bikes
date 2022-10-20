@@ -53,3 +53,21 @@ The methods of the API are the following.
 - PUT `/api/v1/stations/:id` : Update station given the id
 - DELETE `/api/v1/stations/:id` : Delete a station given the id
 
+
+## Tests
+Implemented jest with typescript following the official guide and other sources:
+- https://jestjs.io/docs/getting-started
+- https://medium.com/@natnael.awel/how-to-setup-testing-for-typescript-with-express-js-example-83d3efbb6fd4
+
+Run the following command:
+`pnpm install jest supertest ts-jest types@jest`
+
+Configure jest which creates `jest.config.js`:
+`npx ts-jest config:init`
+
+Added to the config file: 
+```
+transform: {
+"^.+\\.(ts|tsx)$": "ts-jest"
+}
+```
