@@ -4,7 +4,7 @@ import {Response} from "express";
 require("dotenv").config()
 
 // package to manage login
-const morgan = require('morgan')
+// const morgan = require('morgan')
 
 const express = require('express')
 const app = express()
