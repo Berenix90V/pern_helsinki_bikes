@@ -1,6 +1,7 @@
 import {Station} from "../models/Station";
 import {sequelize} from "../db/connection";
 import {QueryTypes} from "sequelize";
+import {count_stations_instances} from "./helpers/query_utils";
 
 beforeEach(async ()=>{
     await sequelize.authenticate()
@@ -9,9 +10,9 @@ afterEach(async()=>{
     await sequelize.close()
 })
 
-describe("Station", ()=>{
+describe("Station Class", ()=>{
     it("Should return all the stations in the database", async()=>{
-        const count = await sequelize.query("SELECT count(*) from stations", {type: QueryTypes.SELECT})
+        const count = await count_stations_instances()
         await expect(Station.fetchAll()).resolves.toHaveLength(+count[0].count)
     })
 })

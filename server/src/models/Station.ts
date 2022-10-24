@@ -1,8 +1,7 @@
 import {sequelize} from '../db/connection'
-import {Model, InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize'
-import {Entity} from "./Entity";
-import {IStationAttributes} from "./IStationAttributes";
-const {DataTypes} = require("sequelize");
+import {Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes } from 'sequelize'
+import {Entity} from "./Entity"
+import {IStationAttributes} from "./IStationAttributes"
 
 class Station extends Entity implements IStationAttributes{
     declare StationID: CreationOptional<number>
@@ -26,6 +25,10 @@ class Station extends Entity implements IStationAttributes{
         return Station.findAll({
             attributes: ['Station_ID', 'Nimi', 'Namn', 'Name']
         })
+    }
+
+    static getByID(id:number): Promise<Station> {
+        return Station.create()
     }
 }
 

@@ -1,5 +1,4 @@
 import {Response, Request} from "express";
-
 import {Station} from '../models/Station'
 
 
@@ -10,7 +9,8 @@ const getAllStations = (req: Request, res: Response) => {
             res.status(200).json({
                 status: "success",
                 data: {
-                    stations: allStations
+                    stations: allStations,
+                    length: allStations.length
                 }
             })
         )

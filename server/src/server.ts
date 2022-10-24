@@ -5,10 +5,10 @@ require("dotenv").config()
 // const morgan = require('morgan')
 
 import express, { Express, Request, Response } from 'express';
-const app: Express = express()
+const app = express()
 
 // import the routes for stations
-const stations = require('./routes/stations')
+import {router as stations} from './routes/stations'
 
 // import db connection
 import {sequelize} from "./db/connection"
@@ -32,9 +32,10 @@ app.get('/', (req: Request,res: Response) =>{
 })
 
 // Routes
-
 app.use('/api/v1/stations', stations)
 
 app.listen(port, ()=>{
     console.log(`Server is up and listening to port ${port}`)
 });
+
+export default app
