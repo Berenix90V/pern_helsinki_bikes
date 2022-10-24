@@ -1,13 +1,11 @@
 // package to manage env variables
-import {Response} from "express";
-
 require("dotenv").config()
 
 // package to manage login
 // const morgan = require('morgan')
 
-const express = require('express')
-const app = express()
+import express, { Express, Request, Response } from 'express';
+const app: Express = express()
 
 // import the routes for stations
 const stations = require('./routes/stations')
@@ -28,11 +26,13 @@ const port = process.env.PORT || 3000
 app.use(express.json())
 
 // HOME
+
 app.get('/', (req: Request,res: Response) =>{
     res.send('Helsinki bikes app')
 })
 
 // Routes
+
 app.use('/api/v1/stations', stations)
 
 app.listen(port, ()=>{
