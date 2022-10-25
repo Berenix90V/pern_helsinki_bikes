@@ -1,7 +1,7 @@
-import {Station} from "../models/Station";
-import {sequelize} from "../db/connection";
+import {Station} from "../../models/Station";
+import {sequelize} from "../../db/connection";
 import {QueryTypes} from "sequelize";
-import {count_stations_instances} from "./helpers/query_utils";
+import {count_stations_instances} from "../helpers/query_utils";
 
 beforeEach(async ()=>{
     await sequelize.authenticate()
