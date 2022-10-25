@@ -1,5 +1,5 @@
 // count the instances of a table
-import {sequelize} from "../../db/connection";
+import {sequelize} from "../../db/db_config";
 import {QueryTypes} from "sequelize";
 
 // sequelize doesn't accept table as parameter so different metods are necessary

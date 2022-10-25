@@ -1,5 +1,5 @@
-import {sequelize} from '../db/connection'
-import {Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes } from 'sequelize'
+import {sequelize} from '../db/db_config'
+import {Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes, where} from 'sequelize'
 import {Entity} from "./Entity"
 import {IStationAttributes} from "./IStationAttributes"
 
@@ -27,9 +27,10 @@ class Station extends Entity implements IStationAttributes{
         })
     }
 
-    static getByID(id:number): Promise<Station> {
-        return Station.create()
+    static getByID(id:number): Promise<Station|null> {
+        return Station.findByPk(id)
     }
+
 }
 
 
@@ -84,11 +85,6 @@ Station.init({
     tableName: 'stations',
     sequelize // passing the `sequelize` instance is required
 })
-
-
-
-
-
 
 
 export {Station}

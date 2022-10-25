@@ -1,5 +1,5 @@
 import {Station} from "../../models/Station";
-import {sequelize} from "../../db/connection";
+import {sequelize} from "../../db/db_config";
 import {QueryTypes} from "sequelize";
 import {count_stations_instances} from "../helpers/query_utils";
 

@@ -31,6 +31,21 @@ DATABASE = 'helsinki_bikes'
 
 Run the python script `/fetch_data/populate_db`.
 
+## Database
+In a first instance sequelize was chosen, but it was too painful to find a work-around every now and then.
+Main problems:
+1. in the method query it doesn't support passing a table as a variable: it escapes.
+2. if inheritance is supported it is only in limited usage. It wasn't possible to have the following structure properly working: an abstract class Entity that 
+extends sequelize models and then 2 subclasses (Station and Trip) that extends Entity. The problem was subtle and it came up only after a while: filtering with 
+the findOne method (the same with other filtering methods) and using the `where` clause threw an error because it doesn't recognise the field.
+Making the Station directly inherit from Model `Station extends Model<InferAttributes<Station>, InferCreationAttributes<Station>>`, the error was fixed.
+Apparently station's attributes are not passed to InferAttributes, that takes only the attributes directly from Entity (so no one).
+
+The first problem was not a bigger one because it was limited in testing environment, where the use of rough query is a substitute of the funcions that have to be tested.
+The min problem was the second one> what is the point of using an ORM if I have to limit my object oriented programming?
+
+
+
 ## Backend
 The backend is structured as a Rest API.
 Create your own `.env` file with the following variables (change them according to your configuration):
