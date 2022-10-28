@@ -42,7 +42,7 @@ Making the Station directly inherit from Model `Station extends Model<InferAttri
 Apparently station's attributes are not passed to InferAttributes, that takes only the attributes directly from Entity (so no one).
 
 The first problem was not a bigger one because it was limited in testing environment, where the use of rough query is a substitute of the funcions that have to be tested.
-The min problem was the second one> what is the point of using an ORM if I have to limit my object oriented programming?
+The min problem was the second one> what is the point of using an ORM if I have to limit my object-oriented programming?
 
 ### Conversion to typeorm
 The conversion to this was quite straightforward, except for an error of ` Duplicate identifier 'IteratorResult'` in `node_modules/.pnpm/@types+es6-shim@0.31.42/node_modules/@types/es6-shim/index.d.ts:6:11 ` and 

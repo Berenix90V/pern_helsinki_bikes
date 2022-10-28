@@ -1,5 +1,5 @@
 import { AppDataSource } from "./data-source"
-/*
+
 export function connect_to_db() {
     AppDataSource
         .initialize()
@@ -10,5 +10,5 @@ export function connect_to_db() {
             console.error("Error during Data Source initialization:", err)
         })
 }
-*/
+
 

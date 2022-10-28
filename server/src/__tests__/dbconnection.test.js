@@ -1,6 +1,7 @@
-import {sequelize} from "../db/db_config"
+import { AppDataSource } from "../db/data-source"
+
 describe("Database connection", ()=>{
     test("Sequelize authenticate function", async ()=>{
-        await expect(sequelize.authenticate()).resolves.not.toThrowError()
+        await expect(AppDataSource.initialize()).resolves.not.toThrowError()
     })
 })

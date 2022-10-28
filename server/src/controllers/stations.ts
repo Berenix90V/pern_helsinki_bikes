@@ -1,10 +1,9 @@
 import {Response, Request} from "express";
-// import {Station} from '../entity/Station'
+import {Station} from '../entity/Station'
 
 
 const getAllStations = (req: Request, res: Response) => {
     console.log("get all stations")
-    /*
     Station.fetchAll()
         .then((allStations: Station[]) =>
             res.status(200).json({
@@ -21,8 +20,6 @@ const getAllStations = (req: Request, res: Response) => {
                 error: err
             })
         )
-
-     */
 }
 
 const createStation = (req: Request,res: Response) => {

@@ -1,5 +1,6 @@
 import {DataSource} from "typeorm";
 require('dotenv').config()
+import {Station} from "../entity/Station"
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -10,7 +11,7 @@ export const AppDataSource = new DataSource({
     database: process.env.PG_DATABASE!,
     synchronize: true,
     logging: true,
-    entities: ["../entity/*.ts"],
+    entities: [Station],
     subscribers: [],
     migrations: [],
 })

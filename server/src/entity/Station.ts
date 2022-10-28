@@ -1,12 +1,11 @@
-/*
 import "reflect-metadata"
-import{ Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import {Entity, Column, PrimaryGeneratedColumn, BaseEntity} from "typeorm";
 import {AbsEntity} from "./Entity";
 
 @Entity({name:"stations", synchronize: false})
 export class Station extends AbsEntity {
     @PrimaryGeneratedColumn()
-    declare StationID: number
+    declare Station_ID: number
 
     @Column({
         length: 100,
@@ -69,9 +68,11 @@ export class Station extends AbsEntity {
     static fetchAll(){
         return Station.find()
     }
-
-
+    /*
+    static createNew(){
+        return Station.create()
+    }
+     */
 }
-*/
 
 // TODO: after having changed the database setting up default values for Kaupunki and Stad, come here to check if some change is needed
