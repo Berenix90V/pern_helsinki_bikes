@@ -1,13 +1,12 @@
-import {Station} from "../../models/Station";
-import {sequelize} from "../../db/db_config";
-import {QueryTypes} from "sequelize";
+import {Station} from "../../entity/Station";
+import { AppDataSource } from "../../db/data-source"
 import {count_stations_instances} from "../helpers/query_utils";
-
+/*
 beforeEach(async ()=>{
-    await sequelize.authenticate()
+    await AppDataSource.initialize()
 })
 afterEach(async()=>{
-    await sequelize.close()
+    await AppDataSource.destroy()
 })
 
 describe("Station Class", ()=>{
@@ -16,3 +15,4 @@ describe("Station Class", ()=>{
         await expect(Station.fetchAll()).resolves.toHaveLength(+count[0].count)
     })
 })
+*/

@@ -1,7 +1,14 @@
-import {sequelize} from "./db_config";
-
+import { AppDataSource } from "./data-source"
+/*
 export function connect_to_db() {
-    sequelize.authenticate()
-        .then(() => console.log('Connection with the database has been established successfully.'))
-        .catch((err:any) => console.log('Unable to connect to the database: {}', err))
+    AppDataSource
+        .initialize()
+        .then(() => {
+            console.log("Data Source has been initialized!")
+        })
+        .catch((err) => {
+            console.error("Error during Data Source initialization:", err)
+        })
 }
+*/
+

@@ -1,92 +1,77 @@
-import {sequelize} from '../db/db_config'
-import {Model, InferAttributes, InferCreationAttributes, CreationOptional, DataTypes, where} from 'sequelize'
-import {Entity} from "./Entity"
-import {IStationAttributes} from "./IStationAttributes"
+/*
+import "reflect-metadata"
+import{ Entity, Column, PrimaryGeneratedColumn} from "typeorm";
+import {AbsEntity} from "./Entity";
 
-class Station extends Entity implements IStationAttributes{
-    declare StationID: CreationOptional<number>
+@Entity({name:"stations", synchronize: false})
+export class Station extends AbsEntity {
+    @PrimaryGeneratedColumn()
+    declare StationID: number
+
+    @Column({
+        length: 100,
+        nullable: false
+    })
     declare Nimi: string
+
+    @Column({
+        length: 100,
+        nullable: false
+    })
     declare Namn: string
+
+    @Column({
+        length: 100,
+        nullable:false
+    })
     declare Name: string
+
+    @Column({
+        type: "text"
+    })
     declare Osoite: string
+
+    @Column({
+        type: "text"
+    })
     declare Adress: string
-    declare Kaupunki: CreationOptional<string>
-    declare Stad: CreationOptional<string>
-    declare Operaattor: CreationOptional<string | null>
+
+    @Column({
+        length: 100,
+    })
+    declare Kaupunki: string
+
+    @Column({
+        length: 100,
+    })
+    declare Stad: string
+
+    @Column()
+    declare Operaattor: string
+
+    @Column({
+        type: "int",
+        nullable: false
+    })
     declare Kapasiteet: number
+
+    @Column({
+        type: "float",
+        nullable:false
+    })
     declare x: number
+    @Column({
+        type: "float",
+        nullable: false
+    })
     declare y: number
 
-    static createNew(): Promise<Station> {
-        return Station.create()
+    static fetchAll(){
+        return Station.find()
     }
 
-    static fetchAll(): Promise<Station[]> {
-        return Station.findAll({
-            attributes: ['Station_ID', 'Nimi', 'Namn', 'Name']
-        })
-    }
-
-    static getByID(id:number): Promise<Station|null> {
-        return Station.findByPk(id)
-    }
 
 }
-
-
-Station.init({
-    StationID:{
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
-    },
-    Nimi:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    Namn:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    Name:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    Osoite:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    Adress:{
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-    Kaupunki:{
-        type: DataTypes.STRING,
-        defaultValue: "Helsinki"
-    },
-    Stad:{
-        type: DataTypes.STRING,
-        defaultValue: "Helsingfors"
-    },
-    Operaattor:{
-        type: DataTypes.STRING
-    },
-    Kapasiteet:{
-        type: DataTypes.INTEGER,
-        allowNull: false
-    },
-    x:{
-        type: DataTypes.FLOAT
-    },
-    y:{
-        type: DataTypes.FLOAT
-    }
-}, {
-    tableName: 'stations',
-    sequelize // passing the `sequelize` instance is required
-})
-
-
-export {Station}
+*/
 
 // TODO: after having changed the database setting up default values for Kaupunki and Stad, come here to check if some change is needed

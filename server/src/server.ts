@@ -1,6 +1,8 @@
 // package to manage env variables
 require("dotenv").config()
 
+import "reflect-metadata"
+
 // package to manage login
 // const morgan = require('morgan')
 
@@ -11,8 +13,10 @@ const app = express()
 import {router as stations} from './routes/stations'
 
 // import db connection
+/*
 import {connect_to_db} from "./db/db_connection"
 connect_to_db()
+ */
 
 
 // If the env variable is not defined we can set up a default value with the syntax " || number"

@@ -44,9 +44,16 @@ Apparently station's attributes are not passed to InferAttributes, that takes on
 The first problem was not a bigger one because it was limited in testing environment, where the use of rough query is a substitute of the funcions that have to be tested.
 The min problem was the second one> what is the point of using an ORM if I have to limit my object oriented programming?
 
-
+### Conversion to typeorm
+The conversion to this was quite straightforward, except for an error of ` Duplicate identifier 'IteratorResult'` in `node_modules/.pnpm/@types+es6-shim@0.31.42/node_modules/@types/es6-shim/index.d.ts:6:11 ` and 
+`node_modules/.pnpm/typescript@4.8.4/node_modules/typescript/lib/lib.es2015.iterable.d.ts:41:6`.
+After a research I find out that it's due to some version problems, maybe some library (typeorm, since before the error was absent) is using previous version types of typescript.
+Solved adding `"skipLibCheck": true` to the tsconfig file.
 
 ## Backend
+### Technology in use
+In a first moment I used plain Javascript, but then I was forced to convert the project in typescript because I needed some features that only oop has.
+### Structure
 The backend is structured as a Rest API.
 Create your own `.env` file with the following variables (change them according to your configuration):
 

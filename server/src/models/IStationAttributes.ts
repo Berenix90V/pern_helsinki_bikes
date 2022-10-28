@@ -1,6 +1,7 @@
-import {CreationOptional, Optional} from "sequelize";
+//import {CreationOptional, Optional} from "sequelize";
 import {IEntityAttributes} from "./IEntityAttributes";
 
+/*
 export interface IStationAttributes extends IEntityAttributes {
     StationID: CreationOptional<number>
     Nimi: string
@@ -18,3 +19,5 @@ export interface IStationAttributes extends IEntityAttributes {
 
 export interface IStationInput extends IStationAttributes{}
 export interface IStationOutput extends Required<IStationAttributes>{}
+
+*/
